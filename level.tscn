@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp4oyt236lgy8"]
+
+[ext_resource type="PackedScene" uid="uid://dpptbmb8ka6jx" path="res://ball.tscn" id="2_21whh"]
+[ext_resource type="PackedScene" uid="uid://d06osoq4v331b" path="res://wall.tscn" id="3_p0nov"]
+[ext_resource type="PackedScene" uid="uid://x2tm82u4aljr" path="res://padel.tscn" id="4_lnryb"]
+[ext_resource type="PackedScene" uid="uid://ym42lb18jnir" path="res://score_wall.tscn" id="5_vwcf3"]
+
+[sub_resource type="Gradient" id="Gradient_qcqmt"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wxsj8"]
+gradient = SubResource("Gradient_qcqmt")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(4.5, 648)
+texture = SubResource("GradientTexture1D_wxsj8")
+
+[node name="Ball" parent="." instance=ExtResource("2_21whh")]
+position = Vector2(576, 320)
+
+[node name="TopWall" parent="." instance=ExtResource("3_p0nov")]
+position = Vector2(0, -64)
+jumpDirection = Vector2(0, 1)
+
+[node name="BottomWall" parent="." instance=ExtResource("3_p0nov")]
+position = Vector2(0, 648)
+
+[node name="PadelLeft" parent="." instance=ExtResource("4_lnryb")]
+position = Vector2(48, 112)
+
+[node name="PadelRight" parent="." instance=ExtResource("4_lnryb")]
+position = Vector2(1104, 112)
+rotation = 3.14159
+jumpDirection = Vector2(-1, 0)
+
+[node name="ScoreWallRight" parent="." instance=ExtResource("5_vwcf3")]
+position = Vector2(1152, 320)
+
+[node name="ScoreWallLeft" parent="." instance=ExtResource("5_vwcf3")]
+position = Vector2(0, 320)
+
+[connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
